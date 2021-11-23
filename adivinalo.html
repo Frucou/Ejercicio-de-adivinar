@@ -38,7 +38,7 @@
                 <legend class="ejercicios_legend">Generar un número aleatorio</legend>
                 <ol class="ejercicio">
                   <li class="ejercicio__item">Pide al ordenador que te genere un numero entero aleatorio entre 0 y 10 y lo muestre en pantalla.							</li>
-                  <li><code class="destacado">return Math.floor(Math.random() * (max - min)) + min;</code>
+                  <li><code class="destacado">return Math.floor(Math.random() * (max - min + 1)) + min;</code>
                     <div>Referencia: <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Math/random">Math.random()</a></div>
                     <ul class="listado">
                       <li>
@@ -60,7 +60,7 @@
                         <label for="aleatorio">Teclee su conjetura</label>
                         <input id="aleatorio" type="text"/>
                         <button class="boton" id="b_aleatorio">Adivínelo </button>
-                        <div id="serie_aleatorio"></div>
+                        <pre id="serie_aleatorio"></pre>
                         <div id="msg_aleatorio"></div>
                       </li>
                     </ul>
@@ -89,7 +89,7 @@
         </article>
       </main>
     </section>
-    <script src="../js/basic.js"></script>
+    
     <script src="js/script.js"></script>
   </body>
 </html>
