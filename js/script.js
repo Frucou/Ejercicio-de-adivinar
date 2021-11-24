@@ -14,6 +14,7 @@ let resultadoAl = null;
 let tirada = 1;
 let tiradas = [];
 let ganaste;
+// let guardarEntrada;
 
 // Funciones
 /**
@@ -54,21 +55,38 @@ btnAdivinar.onclick = () => {
         resultadoAl = generarAleatorio(100, 0);
     }
 
-    // desabilitar el boton a los 10 intentos
-    
-    
-    if (entrada.Number === resultadoAl) {
-        pre.innerHTML = "Es el numero!!!";
-        ganaste = true;
-    } else if (entrada.value < resultadoAl) {
-        pre.innerHTML = `El numero es mas grande a ${entrada.value}`;
-    } else if (entrada.value > resultadoAl) {
-        pre.innerHTML = `El numero es mas pequeño a ${entrada.value}`;
+    let datos = limpiarEspaciosEnBlanco(entrada.value);
+    // console.log(datos);
+    const numeroPattern = /^\d+$/;
+
+    // console.log(tiradas.value);
+    // resultadoAl = Number(resultadoAl);
+    // guardarEntrada = Number(entrada);
+    // console.log(guardarEntrada);
+    // console.log(resultadoAl);
+    // console.log(typeof(guardarEntrada));
+    // console.log(Number.isNaN(guardarEntrada));
+
+    //  desabilitar el boton a los 10 intentos
+    if (numeroPattern.test(datos)) {
+
+        // console.log(datos);
+        datos = Number(datos);
+        // console.log(datos);
+
+        if (datos === resultadoAl) {
+            pre.innerHTML = "Es el numero!!!";
+            ganaste = true;
+        } else if (datos < resultadoAl) {
+            pre.innerHTML = `El numero es mas grande a ${datos}`;
+        } else {
+            pre.innerHTML = `El numero es mas pequeño a ${datos}`;
+        }
     } else {
         pre.innerHTML = `No es un número`
     }
     console.log(resultadoAl)
-    console.log(entrada.value)
+    // console.log(Number(entrada))
 
     if (ganaste === true || tirada === 11) {
         btnAdivinar.disabled = true;
