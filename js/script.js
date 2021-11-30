@@ -1,5 +1,8 @@
 "use strict";
 
+
+import { generarAleatorio, limpiarEspaciosEnBlanco, msg } from "./functions.js";
+
 // Nodos
 const btnGenerar = document.querySelector("#b_generar");
 const msgGenerar = document.querySelector("#msg_generar");
@@ -17,31 +20,6 @@ let ganaste;
 // let guardarEntrada;
 
 // Funciones
-/**
- * Genera un número aleatorio entre dos números
- * @param {Number} max  Número entero. El rango mayor de selección aleatorio
- * @param {Number} min Número entero. El rango menor de selección aleatorio
- * @returns {Number} El número aleatorio entre max y min
- */
-const generarAleatorio = (max, min) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-/**
- * 
- * @param {String} texto 
- * @returns {String}
- */
-const limpiarEspaciosEnBlanco = (texto) => {
-    const leftPattern = /^\s+/;
-    const rightPattern = /\s+$/;
-    const middlePattern = /\s+/g; //flag para que lo aplique de forma global y no solo una vez
-    texto = texto.replace(leftPattern, "");
-    texto = texto.replace(rightPattern, "");
-    texto = texto.replace(middlePattern, "");
-    return texto;
-}
-
 btnGenerar.onclick = () => {
     let resultadoAl = generarAleatorio(10, 0);
     msgGenerar.innerHTML = `<strong>${resultadoAl}</strong>`;
@@ -93,6 +71,120 @@ btnAdivinar.onclick = () => {
         // setTimeout
     }
 }
+
+
+/** 
+ * Definir una función que muestre información sobre una cadena de texto
+ * que se le pasa como argumento. A partir de la cadena que se le pasa, 
+ * la función determina si esa cadena está formada sólo por mayúsculas, 
+ * sólo por minúsculas o por una mezcla de ambas.
+ * 
+ * @param {object} e El evento Ej: click, mouseover, dbclick
+ */
+document.querySelector("#enlace_1").onclick = e => {
+    e.preventDefault();
+    // const padreElement = e.target.parentElement; // devuelve el padre de un elemento
+
+    /**
+     * Función que compara dos caracteres para determinar si está en 
+     * mayúscula
+     * @param {String} letra Una letra no más
+     * @returns {Boolean} True si es mayúscula y false para todo lo demás
+     */
+    const esMayuscula = (letra) => {
+        return letra === letra.toUpperCase();
+    }
+
+    const esMinuscula = (letra) => {
+        return letra === letra.toLowerCase();
+    }
+
+    let mayuscula = false;
+    let minuscula = false;
+    const texto = prompt("Dame un texto", "Texto");
+    // Expresión regular que busca texto alfabetico
+    const expReg_abc = /[a-zA-ZÀ-ÿ\u00f1\u00d1çÇ]+/g;
+    // Quiero buscar las coincidencias de una cadena. Eje: Xurxo32 --> Xurxo
+    let textoAbc = texto.match(expReg_abc);
+    textoAbc = textoAbc.join("");
+    console.log(textoAbc);
+    // Voy a recorrer el texto
+    for (let i = 0; i < textoAbc.length; i++) {
+        if (esMayuscula(textoAbc[i])) {
+            mayuscula = true;
+            // break;
+        } else { // Es minúscula
+            minuscula = true;
+        }
+    }
+
+    if (mayuscula && minuscula) {
+        msg(
+            `<br>En la cadena "${texto}" hay mayúsculas y minúsculas.</br>`,
+            e.target.parentElement
+        );
+    } else if (mayuscula) {
+        msg(`<br> En la cadena "${texto}" hay mayúsculas.</br>`, e.target.parentElement)
+    } else {
+        msg(`<br>En la cadena "${texto}" hay minúsculas.</br>`, e.target.parentElement)
+    }
+
+
+}
+
+
+
+/**
+ * Definir una función que determine si la cadena de texto que se le pasa 
+ * como parámetro es un palíndromo, es decir, si se lee de la misma forma
+ *  desde la izquierda y desde la derecha. Ejemplo de palíndromo complejo:
+ *  "La ruta nos aporto otro paso natural".
+ * 
+ * @param {object} e El evento Ej: click, mouseover, dbclick
+ */
+document.querySelector("#enlace_2").onclick = e => {
+    e.preventDefault();
+
+    const texto = prompt("Dame una cadena de texto", 
+    "La ruta nos aporto otro paso natural");
+
+    /**
+     * 
+     * @param {String} str Cadena de texto para comprobar si es palíndromo
+     * @returns {String} str La comprobación del string
+     */
+    // const palinComprobar = (str) => {
+        // str = texto;
+        const nuevoStr = texto.replace(/[\W_]/g, "").toLowerCase();
+        const strVuelta = nuevoStr.split("").reverse().join("");
+        
+
+        // return strVuelta === str ? "es palindromo" : "no es palindromo"
+        console.log(nuevoStr);
+        console.log(strVuelta);
+
+
+        if (nuevoStr === strVuelta) {
+            msg(
+                `<br>${texto}. Es palíndromo</br>`, e.target.parentElement
+            );
+        } else {
+            msg(
+                `<br>${texto}. No es palíndromo</br>`, e.target.parentElement
+            );
+        }
+
+        
+
+    // }
+
+    console.log();
+    // console.log(palinComprobar("La ruta nos aporto otro paso natural"));
+    // console.log(palinComprobar("omo"));
+
+
+}
+
 
 
 // Eventos
