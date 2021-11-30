@@ -145,43 +145,100 @@ document.querySelector("#enlace_1").onclick = e => {
 document.querySelector("#enlace_2").onclick = e => {
     e.preventDefault();
 
-    const texto = prompt("Dame una cadena de texto", 
-    "La ruta nos aporto otro paso natural");
+    const texto = prompt("Dame una cadena de texto",
+        "La ruta nos aporto otro paso natural");
 
     /**
      * 
-     * @param {String} str Cadena de texto para comprobar si es palíndromo
-     * @returns {String} str La comprobación del string
+     * @param {String} string Cadena de texto para comprobar si es palíndromo
+     * 
      */
-    // const palinComprobar = (str) => {
-        // str = texto;
-        const nuevoStr = texto.replace(/[\W_]/g, "").toLowerCase();
-        const strVuelta = nuevoStr.split("").reverse().join("");
-        
-
-        // return strVuelta === str ? "es palindromo" : "no es palindromo"
-        console.log(nuevoStr);
-        console.log(strVuelta);
+    const nuevoStr = texto.replace(/[\W_]/g, "").toLowerCase();
+    const strVuelta = nuevoStr.split("").reverse().join("");
 
 
-        if (nuevoStr === strVuelta) {
-            msg(
-                `<br>${texto}. Es palíndromo</br>`, e.target.parentElement
-            );
-        } else {
-            msg(
-                `<br>${texto}. No es palíndromo</br>`, e.target.parentElement
-            );
-        }
+    // return strVuelta === str ? "es palindromo" : "no es palindromo"
+    // console.log(nuevoStr);
+    // console.log(strVuelta);
 
-        
 
-    // }
+    if (nuevoStr === strVuelta) {
+        msg(
+            `<br>"${texto}". Es palíndromo</br>`, e.target.parentElement
+        );
+    } else {
+        msg(
+            `<br>"${texto}". No es palíndromo</br>`, e.target.parentElement
+        );
+    }
 
-    console.log();
-    // console.log(palinComprobar("La ruta nos aporto otro paso natural"));
-    // console.log(palinComprobar("omo"));
+}
 
+
+/**
+ * Definir el siguiente objeto en JavaScript:
+Objeto Persona con las propiedades nombre, edad y género, y el método 
+obtDetalles(), que muestra por pantalla las propiedades de la persona.
+Crear los objetos y casos de prueba necesarios para comprobar su correcto
+ funcionamiento.
+ */
+
+import {Persona} from "./Persona.js";
+
+document.querySelector("#enlace_3").onclick = e => {
+    e.preventDefault();
+
+
+    // console.log(typeof Persona); //Devuelve function porque es plantilla
+    const p1 = new Persona("Fabián", "Ruiz", "28 años", "Masculino"); // Instanciamos plantilla
+    const p2 = new Persona("Xurxo", "González");
+    const p3 =  new Persona();
+
+    // msg(`<br>${p1.getDatosCompleto()}</br>`, e.target.parentElement);
+    // console.log(p2.getNombreCompleto());
+    // console.log(p3.getNombreCompleto());
+    p3.setDatos(prompt("Nombres"),prompt("Apellidos"),prompt("Generos"),prompt("Edad"));
+    msg(`<br>${p3.getDatosCompleto()}</br>`, e.target.parentElement);
+
+    // const personas = [
+    //     {
+    //         // Cargamos las propiedades
+    //         nombre: "Fabian",
+    //         apellidos: "Ruiz",
+    //         edad: "28 años",
+    //         género: "Masculino",
+    //         intereses: ["Programación", "Videojuegos"],
+    //         dimeIntereses: function () {
+    //             return `Mis intereses son ${this.intereses.join(", ")}`;
+    //         }
+    //     },
+    //     {
+    //         // Cargamos las propiedades
+    //         nombre: "David",
+    //         apellidos: "González",
+    //         edad: "38 años",
+    //         género: "Masculino",
+    //         intereses: ["Electricidad", "Videojuegos"],
+    //         dimeIntereses: function () {
+    //             return `Mis intereses son ${this.intereses.join(", ")}`;
+    //         }
+    //     }
+    // ]
+
+
+    // // persona.apellidos = "Ruiz Couselo";
+    // // persona.intereses.push("Animales");
+
+    // // console.log(`Me llamo ${persona.nombre} ${persona.apellidos} y ${persona.dimeIntereses().toLocaleLowerCase()}`);
+    // // console.log(personas);
+
+    // personas[1].apellidos = "Gaucho"
+
+    // personas.forEach(
+    //     (persona) => {
+    //         console.log(`Me llamo ${persona.nombre} ${persona.apellidos} y ${persona.dimeIntereses().toLocaleLowerCase()}`);
+    //     }
+    // );
 
 }
 
